@@ -114,8 +114,11 @@ class _TeslaControlScreenState extends State<TeslaControlScreen>
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
-                    CircularBlurWidget(
-                      constraints: constraints,
+                    Positioned(
+                      top: constraints.maxWidth * 0.5,
+                      child: CircularBlurWidget(
+                        constraints: constraints,
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
@@ -275,7 +278,11 @@ class _TeslaControlScreenState extends State<TeslaControlScreen>
 
   void _onVerticalDragUpdate(DragUpdateDetails details) {
     print(details.delta.dy);
-    _teslaDragController.forward();
+    if (details.delta.dy < 1) {
+      _teslaDragController.forward();
+    } else {
+      _teslaDragController.reverse();
+    }
   }
 }
 
@@ -289,7 +296,7 @@ class CircularBlurWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = constraints.maxWidth * 1.3;
+    final width = constraints.maxWidth * 1.4;
     final radius = width / 2;
 
     return Container(
