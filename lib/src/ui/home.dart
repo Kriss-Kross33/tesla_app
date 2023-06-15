@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tesla_app/src/ui/tesla_control.dart';
+import 'package:tesla_app/src/ui/tesla_control_screen.dart';
 import 'package:tesla_app/src/utils/utils.dart';
 
 import 'widgets/widgets.dart';
@@ -246,7 +246,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                   context,
                                   PageRouteBuilder(
                                     pageBuilder: (_, __, ___) =>
-                                        const TeslaControl(),
+                                        const TeslaControlScreen(),
                                     transitionDuration:
                                         const Duration(seconds: 2),
                                     reverseTransitionDuration: Duration.zero,

@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:tesla_app/src/ui/testa_screen.dart';
 import 'package:tesla_app/src/utils/utils.dart';
 
 import 'widgets/widgets.dart';
@@ -139,11 +140,19 @@ class _TeslaControlScreenState extends State<TeslaControlScreen>
                             right: 0,
                             child: Hero(
                               tag: '1',
-                              child: ProfileWidget(
-                                duration: Duration.zero,
-                                constraints: constraints,
-                                searchContainerColor:
-                                    _searchContainerAnimation.value,
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                    return const TestaScreen();
+                                  }));
+                                },
+                                child: ProfileWidget(
+                                  duration: Duration.zero,
+                                  constraints: constraints,
+                                  searchContainerColor:
+                                      _searchContainerAnimation.value,
+                                ),
                               ),
                             ),
                           ),

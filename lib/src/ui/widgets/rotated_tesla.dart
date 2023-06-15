@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:tesla_app/src/ui/tesla_control.dart';
+import 'package:tesla_app/src/ui/tesla_control_screen.dart';
 import 'package:tesla_app/src/utils/utils.dart';
 
 class RotatedTesla extends StatelessWidget {
@@ -28,7 +28,7 @@ class RotatedTesla extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) {
-                return const TeslaControl();
+                return const TeslaControlScreen();
               },
             ),
           );
