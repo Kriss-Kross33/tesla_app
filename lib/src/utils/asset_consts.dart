@@ -3,6 +3,7 @@ class AssetConsts {
 
   //* PNGS
   static const String alarm = 'assets/images/pngs/alarm.png';
+  static const String alarmAlt = 'assets/images/pngs/alarm_alt.png';
   static const String arrowDown = 'assets/images/pngs/arrow_down.png';
   static const String arrowUp = 'assets/images/pngs/arrow_up.png';
   static const String batteryCharge = 'assets/images/pngs/battery_charge.png';
