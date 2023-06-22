@@ -425,27 +425,6 @@ class _TeslaControlState extends State<TeslaControl>
                           ],
                         ),
                       ),
-                      // Positioned(
-                      //   left: constraints.maxWidth,
-                      //   width: constraints.maxWidth * 0.56,
-                      //   height: constraints.maxHeight * 0.6,
-                      //   bottom: -constraints.maxHeight * 0.25,
-                      //   child: Hero(
-                      //     tag: '2',
-                      //     child: GestureDetector(
-                      //       onTap: () {
-
-                      //       },
-                      //       child: Transform(
-                      //         transform: Matrix4.identity()..rot,
-                      //         child: Image.asset(
-                      //           AssetConsts.tesla,
-                      //           fit: BoxFit.fill,
-                      //         ),
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
                     ],
                   ),
                 ),
