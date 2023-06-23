@@ -32,5 +32,6 @@ class AssetConsts {
   static const String powerOff = 'assets/images/pngs/power_off.png';
   static const String baseMap = 'assets/images/pngs/base_map.png';
   static const String baseMap2 = 'assets/images/pngs/base_map2.png';
+  static const String baseMapLg = 'assets/images/pngs/base_map_lg.png';
   static const String highway = 'assets/images/pngs/power_off.png';
 }
