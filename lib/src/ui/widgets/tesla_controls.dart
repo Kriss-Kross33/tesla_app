@@ -176,7 +176,7 @@ class _TeslaControlsState extends State<TeslaControls>
                         height: widget.constraints.maxHeight * 0.12,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(40),
-                          color: AppConsts.black,
+                          color: AppConsts.onyx,
                         ),
                         child: Column(
                           children: [
