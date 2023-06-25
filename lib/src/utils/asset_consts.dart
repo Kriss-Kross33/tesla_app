@@ -6,6 +6,7 @@ class AssetConsts {
   static const String alarmAlt = 'assets/images/pngs/alarm_alt.png';
   static const String arrowDown = 'assets/images/pngs/arrow_down.png';
   static const String arrowUp = 'assets/images/pngs/arrow_up.png';
+  static const String arrowBack = 'assets/images/pngs/arrow_back.png';
   static const String batteryCharge = 'assets/images/pngs/battery_charge.png';
   static const String charge = 'assets/images/pngs/charge.png';
   static const String exhaust = 'assets/images/pngs/exhaust.png';
@@ -21,6 +22,7 @@ class AssetConsts {
   static const String vect1 = 'assets/images/pngs/vect1.png';
   static const String vect2 = 'assets/images/pngs/vect2.png';
   static const String vect3 = 'assets/images/pngs/vect3.png';
+  static const String destination = 'assets/images/pngs/destination.png';
 
   //* SVGS
   static const String alarm2 = 'assets/images/pngs/alarm.png';
