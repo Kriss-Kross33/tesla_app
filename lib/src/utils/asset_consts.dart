@@ -9,6 +9,7 @@ class AssetConsts {
   static const String arrowBack = 'assets/images/pngs/arrow_back.png';
   static const String batteryCharge = 'assets/images/pngs/battery_charge.png';
   static const String charge = 'assets/images/pngs/charge.png';
+  static const String warning = 'assets/images/pngs/warning.png';
   static const String exhaust = 'assets/images/pngs/exhaust.png';
   static const String location2 = 'assets/images/pngs/location_2.png';
   static const String location = 'assets/images/pngs/location.png';
