@@ -63,12 +63,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppConsts.scaffoldBgColor,
       body: Padding(
         padding: const EdgeInsets.only(
           left: AppConsts.defaultPadding,
           right: AppConsts.defaultPadding,
-          top: 40,
         ),
         child: LayoutBuilder(builder: (context, constraints) {
           return AnimatedBuilder(
@@ -89,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         duration: Duration.zero,
                         opacity: _greetingTextAnimation.value,
                         child: Padding(
-                          padding: const EdgeInsets.only(top: 40.0),
+                          padding: const EdgeInsets.only(top: 80.0),
                           child: RichText(
                             text: TextSpan(
                               children: <TextSpan>[
@@ -119,10 +118,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                     ),
                     Positioned(
                       right: 0,
-                      top: constraints.maxHeight * 0.04,
+                      top: constraints.maxHeight * 0.08,
                       child: Hero(
                         tag: '1',
                         child: ProfileWidget(
+                          searchContainerColor: Colors.black,
                           duration: AppConsts.defaultDuration,
                           animationValue: _profilePictureAnimation.value,
                           constraints: constraints,
@@ -133,94 +133,49 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       duration: const Duration(milliseconds: 300),
                       left: 0,
                       right: 0,
-                      top: (constraints.maxHeight * 0.15) *
+                      top: (constraints.maxHeight * 0.19) *
                           (1 - _teslaInfoContainerAnimation.value * 0.1),
                       child: AnimatedOpacity(
                         duration: Duration.zero,
                         opacity: _teslaInfoContainerAnimation.value,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              width: constraints.maxWidth,
-                              height: constraints.maxHeight * 0.45,
-                              decoration: BoxDecoration(
-                                color: AppConsts.pinkDuet,
-                                borderRadius: BorderRadius.circular(50),
-                              ),
-                              child: Stack(
-                                //   alignment: Alignment.center,
-                                children: [
-                                  Positioned(
-                                    left: 35,
-                                    top: 30,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'Model 2.0 ',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .headlineSmall
-                                              ?.copyWith(
-                                                fontWeight: FontWeight.w800,
-                                              ),
-                                        ),
-                                        const SizedBox(
-                                          height: 5,
-                                        ),
-                                        Text(
-                                          'DURA chassis',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .titleMedium
-                                              ?.copyWith(
-                                                fontWeight: FontWeight.w400,
-                                                color: Colors.grey.shade500,
-                                              ),
-                                        ),
-                                      ],
+                        child: PinkTeslaModelContainer(
+                          constraints: constraints,
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: constraints.maxHeight * 0.34,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 10.0),
+                        child: RichText(
+                          text: TextSpan(
+                            children: <TextSpan>[
+                              TextSpan(
+                                text: 'Charging ',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleLarge
+                                    ?.copyWith(
+                                      fontWeight: FontWeight.w800,
                                     ),
-                                  ),
-                                ],
                               ),
-                            ),
-                            const SizedBox(height: 15),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 10.0),
-                              child: RichText(
-                                text: TextSpan(
-                                  children: <TextSpan>[
-                                    TextSpan(
-                                      text: 'Charging ',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleLarge
-                                          ?.copyWith(
-                                            fontWeight: FontWeight.w800,
-                                          ),
+                              TextSpan(
+                                text: 'Stations',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleLarge
+                                    ?.copyWith(
+                                      fontWeight: FontWeight.w400,
                                     ),
-                                    TextSpan(
-                                      text: 'Stations',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleLarge
-                                          ?.copyWith(
-                                            fontWeight: FontWeight.w400,
-                                          ),
-                                    ),
-                                  ],
-                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
                     AnimatedPositioned(
                       duration: AppConsts.defaultDuration,
-                      top: 80,
+                      top: 100,
                       left: constraints.maxWidth *
                           1.7 *
                           (1 - _teslaForwardAnimation.value * 0.7),
@@ -233,7 +188,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       ),
                     ),
                     Positioned(
-                      bottom: 30,
+                      bottom: 20,
                       left: 0,
                       right: 0,
                       child: Row(
@@ -273,7 +228,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                         height: 36,
                                         width: 76,
                                         foregroundDecoration: BoxDecoration(
-                                          color: Colors.black,
                                           borderRadius:
                                               BorderRadius.circular(47),
                                           border: Border.all(
@@ -292,7 +246,9 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                                             ],
                                           ),
                                         ),
-                                        decoration: const BoxDecoration(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(47),
                                           color: Colors.black,
                                         ),
                                         child: Center(
