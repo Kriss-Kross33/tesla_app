@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tesla_app/src/ui/charge_station_screen.dart';
+import 'package:tesla_app/src/ui/widgets/widgets.dart';
 import 'package:tesla_app/src/utils/utils.dart';
 
 class NearestStationScreen extends StatelessWidget {
@@ -7,6 +9,7 @@ class NearestStationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppConsts.scaffoldDarkColor,
       body: LayoutBuilder(builder: (context, constraints) {
         return Stack(
           children: [
@@ -62,12 +65,37 @@ class NearestStationScreen extends StatelessWidget {
             ),
             Positioned(
               bottom: constraints.maxHeight * 0.36,
-              left: constraints.maxWidth * 0.385,
-              child: Image.asset(
-                AssetConsts.batteryCharge,
-                height: 70,
-                width: 60,
-                fit: BoxFit.fill,
+              left: constraints.maxWidth * 0.37,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    CustomSlideTransition(
+                      slideFrom: SlideDirection.right,
+                      child: const ChargeStationScreen(),
+                    ),
+                  );
+                },
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Image.asset(
+                      AssetConsts.destination,
+                      height: 80,
+                      width: 70,
+                      fit: BoxFit.fill,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      child: Image.asset(
+                        AssetConsts.batteryCharging,
+                        height: 32,
+                        width: 24,
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             Positioned(
