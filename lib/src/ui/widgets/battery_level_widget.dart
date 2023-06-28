@@ -9,12 +9,16 @@ class BatteryLevelWidget extends StatelessWidget {
     required this.batteryLevel,
     this.width,
     this.height,
+    this.borderRadius,
+    this.batteryLevelHeight,
   });
 
   final BoxConstraints constraints;
   final double batteryLevel;
+  final double? batteryLevelHeight;
   final double? width;
   final double? height;
+  final double? borderRadius;
 
   @override
   Widget build(BuildContext context) {
@@ -28,32 +32,37 @@ class BatteryLevelWidget extends StatelessWidget {
       ),
       height: height ?? constraints.maxHeight * 0.3,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(40),
-        color: AppConsts.grey,
+        borderRadius: BorderRadius.circular(borderRadius ?? 40),
+        color: Colors.white,
       ),
       child: Stack(
+        alignment: Alignment.center,
         children: [
-          Align(
-            alignment: Alignment.topCenter,
-            child: Column(
-              children: [
-                Text(
-                  '${batteryLevel.toStringAsFixed(0)}%',
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w800,
-                      ),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                Text(
-                  'Battery',
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Colors.grey.shade500,
-                        fontWeight: FontWeight.w400,
-                      ),
-                ),
-              ],
+          Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: Align(
+              alignment: Alignment.topCenter,
+              child: Column(
+                children: [
+                  Text(
+                    '${batteryLevel.toStringAsFixed(0)}%',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w800,
+                      fontSize: batteryLevelHeight != null ? 20 : 18,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    'Battery',
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Colors.grey.shade500,
+                          fontWeight: FontWeight.w400,
+                        ),
+                  ),
+                ],
+              ),
             ),
           ),
           Positioned(
@@ -61,20 +70,43 @@ class BatteryLevelWidget extends StatelessWidget {
             left: 0,
             right: 0,
             child: Container(
-              height: constraints.maxHeight * 0.18,
+              height: batteryLevelHeight ?? constraints.maxHeight * 0.18,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                gradient: LinearGradient(
-                  colors: [
-                    AppConsts.limeGreen,
-                    AppConsts.limeGreen.withOpacity(0.1),
-                  ],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                ),
+                borderRadius:
+                    BorderRadius.circular(batteryLevelHeight != null ? 50 : 30),
+                color: AppConsts.limeGreen,
               ),
             ),
           ),
+          Positioned(
+            top: 85,
+            child: Image.asset(
+              AssetConsts.arrowUp,
+              height: 10,
+              width: 15,
+              fit: BoxFit.fill,
+              color: Colors.black.withOpacity(0.5),
+            ),
+          ),
+          Positioned(
+            top: 155,
+            child: Image.asset(
+              AssetConsts.arrowDown,
+              height: 10,
+              width: 15,
+              fit: BoxFit.fill,
+              color: Colors.black.withOpacity(0.5),
+            ),
+          ),
+          Positioned(
+              top: 125,
+              child: Container(
+                width: 20,
+                height: 2,
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.5),
+                ),
+              )),
         ],
       ),
     );
