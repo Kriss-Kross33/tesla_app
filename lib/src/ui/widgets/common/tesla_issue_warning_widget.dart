@@ -41,9 +41,11 @@ class _TeslaIssueWarningWidgetState extends State<TeslaIssueWarningWidget>
     _issueController.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         Future.delayed(const Duration(milliseconds: 1500), () {
-          _issueController
-            ..reset()
-            ..forward();
+          if (mounted) {
+            _issueController
+              ..reset()
+              ..forward();
+          }
         });
       }
     });
@@ -51,6 +53,7 @@ class _TeslaIssueWarningWidgetState extends State<TeslaIssueWarningWidget>
 
   @override
   void dispose() {
+    _issueController.removeStatusListener((status) {});
     _issueController.dispose();
     super.dispose();
   }
