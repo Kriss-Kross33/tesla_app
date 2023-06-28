@@ -11,7 +11,8 @@ class AppConsts {
   static const Color black = Color(0xFF191E26);
   static const Color grey = Color(0xFFF6F6F6);
   static const Color onyx = Color(0xFF313439);
+  static const Color scaffoldDarkColor = Color(0xFF1C1E21);
 
   static const double defaultPadding = 20;
-  static const Duration defaultDuration = Duration(milliseconds: 400);
+  static const Duration defaultDuration = Duration(milliseconds: 300);
 }
