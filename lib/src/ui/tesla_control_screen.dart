@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:tesla_app/src/ui/nearest_station_screen.dart';
 import 'package:tesla_app/src/utils/utils.dart';
 
 import 'widgets/widgets.dart';
@@ -26,6 +28,7 @@ class _TeslaControlScreenState extends State<TeslaControlScreen>
   late AnimationController _teslaDragController;
   late Animation<double> _teslaCarDragAnimation;
   late Animation<double> _radialOpacityAnimation;
+  late Animation<double> _pinkContainerShrinkAnimation;
 
   @override
   void initState() {
@@ -34,6 +37,11 @@ class _TeslaControlScreenState extends State<TeslaControlScreen>
         vsync: this, duration: const Duration(milliseconds: 600));
     _teslaRotationAnimation =
         CurvedAnimation(parent: _teslaController, curve: const Interval(0, 1));
+
+    _pinkContainerShrinkAnimation = Tween<double>(begin: 1.0, end: 0.0).animate(
+        CurvedAnimation(
+            parent: _teslaController, curve: const Interval(0.4, 1.0)));
+
     _teslaSizeAnimation = CurvedAnimation(
         parent: _teslaController, curve: const Interval(0.7, 1));
     _teslaController.forward();
@@ -44,7 +52,7 @@ class _TeslaControlScreenState extends State<TeslaControlScreen>
     );
     _backgroundColorAnimation = ColorTween(
       begin: Colors.white,
-      end: Colors.black,
+      end: AppConsts.scaffoldDarkColor,
     ).animate(_backgroundColorController);
     _searchContainerAnimation = ColorTween(
       begin: Colors.black,
@@ -147,6 +155,16 @@ class _TeslaControlScreenState extends State<TeslaControlScreen>
                         ),
                       ),
                     ),
+                    Positioned(
+                      top: constraints.maxHeight * 0.15,
+                      child: Container(
+                        width: constraints.maxWidth *
+                            _pinkContainerShrinkAnimation.value,
+                        child: PinkTeslaModelContainer(
+                          constraints: constraints,
+                        ),
+                      ),
+                    ),
                     Padding(
                       padding: const EdgeInsets.only(
                         top: 40,
@@ -177,24 +195,11 @@ class _TeslaControlScreenState extends State<TeslaControlScreen>
                               ),
                             ),
                           ),
-                          AnimatedPositioned(
+                          const AnimatedPositioned(
                             top: 0,
                             duration: Duration.zero,
                             left: 60,
-                            child: Column(
-                              children: [
-                                Text(
-                                  'Model 2.0 ',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headlineMedium
-                                      ?.copyWith(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w800,
-                                      ),
-                                ),
-                              ],
-                            ),
+                            child: ModelWidget(),
                           ),
                           AnimatedPositioned(
                             duration:
@@ -247,89 +252,27 @@ class _TeslaControlScreenState extends State<TeslaControlScreen>
                                     ),
                             ),
                           ),
-                          Positioned(
-                            bottom: 20,
-                            child: Container(
-                              padding: const EdgeInsets.only(
-                                left: 40,
-                                right: 30,
-                              ),
-                              width: constraints.maxWidth - 40,
-                              height: constraints.maxHeight * 0.12,
-                              decoration: BoxDecoration(
-                                color: AppConsts.pinkDuet,
-                                borderRadius: BorderRadius.circular(30),
-                              ),
-                              child: Row(
-                                children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text.rich(
-                                        TextSpan(
-                                          children: <TextSpan>[
-                                            TextSpan(
-                                              text: '2 Mild ',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .titleLarge
-                                                  ?.copyWith(
-                                                    fontWeight: FontWeight.w800,
-                                                  ),
-                                            ),
-                                            TextSpan(
-                                              text: 'Issues',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .headlineSmall,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Text(
-                                        'Maintenance',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .titleMedium
-                                            ?.copyWith(
-                                              color: Colors.grey,
-                                            ),
-                                      )
-                                    ],
-                                  ),
-                                  const Spacer(),
-                                  Container(
-                                    height: 60,
-                                    width: 60,
-                                    decoration: const BoxDecoration(
-                                      color: Colors.white,
-                                      shape: BoxShape.circle,
-                                    ),
-                                    child: Center(
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          boxShadow: [
-                                            BoxShadow(
-                                              blurRadius: 5,
-                                              color: AppConsts.red
-                                                  .withOpacity(0.4),
-                                              spreadRadius: 1,
-                                              offset: const Offset(0, 3.5),
-                                            )
-                                          ],
-                                        ),
-                                        child: Image.asset(
-                                          AssetConsts.alarmAlt,
-                                          height: 20,
-                                          width: 20,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                          AnimatedPositioned(
+                            duration: const Duration(milliseconds: 300),
+                            bottom: _teslaCarDragAnimation.value == 1
+                                ? -120.0
+                                : 30.0,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    CustomScalePageTransition(
+                                      child: const NearestStationScreen(),
+                                    )
+                                    // MaterialPageRoute(
+                                    //   builder: (context) {
+                                    //     return const NearestStationScreen();
+                                    //   },
+                                    // ),
+                                    );
+                              },
+                              child: MaintenanceWidet(
+                                constraints: constraints,
                               ),
                             ),
                           ),
@@ -353,4 +296,3 @@ class _TeslaControlScreenState extends State<TeslaControlScreen>
     }
   }
 }
-
